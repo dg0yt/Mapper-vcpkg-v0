@@ -38,6 +38,9 @@ jobs:
       uses: actions/checkout@v6.1.0
       with:
         persist-credentials: false
+    - name: Install android-28
+      run: |
+        $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-28"
     - name: Build
       id: build
       uses: $/.github/actions/build-mapper
@@ -52,7 +55,7 @@ jobs:
           -DANDROID_SDK=/usr/local/lib/android/sdk
           -DANDROID_SDK_BUILD_TOOLS_REVISION=34
           -DCMAKE_SYSTEM_VERSION=24
-          -DANDROIDDEPLOYQT_ARGS=--android-platform;android-34
+          -DANDROIDDEPLOYQT_ARGS=--android-platform;android-28
 
   arm64-macos:
     if: ${{ contains('^arm64-macos$', inputs.target_pattern) }}
